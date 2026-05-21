@@ -15,7 +15,7 @@ export const createorder = async (orderdata: OrderData) => {
         const result = {
             email: orderdata.email,
             phonenumber: orderdata.phonenumber,
-            status: ["created"],
+            status: "created",
             sessionId: sessionId
         }
 

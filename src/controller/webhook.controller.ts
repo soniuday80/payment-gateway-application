@@ -2,18 +2,22 @@ import { Request, Response } from "express";
 import Stripe from "stripe";
 import { HandlewebhookEvent } from "../services/webhook.service";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  // Set the API version to the latest stable version
+  apiVersion: '2026-04-22.dahlia'
+});
 const endpoint_secret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-export const handlewebhook = (req: Request, res: Response) => {
-
+export const handlewebhook = async (req: Request, res: Response) => {
 
    const sig = req.headers['stripe-signature'] as string; 
-   let event: Stripe.Event; // why its giving error 
    try {
     // verifying the webhooks signature 
-    event = stripe.webhooks.constructEvent(req.body , endpoint_secret , sig);
-    HandlewebhookEvent(event)
+   const event = stripe.webhooks.constructEvent(req.body, sig, endpoint_secret); 
+    await HandlewebhookEvent(event)
+    // return a 200 response
+    return res.status(200).json({ received: true });
    } catch (err) {
     console.log(`Webhook signature verification failed.`, err);
     return res.status(400).send(`Webhook Error: ${err}`);

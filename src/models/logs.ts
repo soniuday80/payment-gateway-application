@@ -2,8 +2,7 @@
 import { Schema, model, Document } from 'mongoose';
 
 // Define the interface for the document shape
-export interface EventLog extends Document {
-    id: string;                    
+export interface EventLog extends Document {                   
     object: 'event';               
     api_version: string;           
     created: number;               
@@ -28,7 +27,6 @@ export interface EventLog extends Document {
 
 // define the schema
 const eventLogSchema = new Schema<EventLog>({
-    id: { type: String, required: true, unique: true },
     object: { type: String, required: true },
     api_version: { type: String, required: true },
     created: { type: Number, required: true },

@@ -9,7 +9,6 @@ const app: express.Application = express();
 const PORT: number = 3000;
 
 
-
 app.use('/webhook', express.raw({ type: 'application/json' }) , webhookRouter); // raw body parser for webhook route to handle Stripe's webhook events
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use("/create-order" , createOrderRouter) // Use the create order route for handling requests to /create-order

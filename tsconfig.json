@@ -9,7 +9,6 @@
     // See also https://aka.ms/tsconfig/module
     "module": "commonjs",
     "target": "es2016",
-    "types": [],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -40,6 +39,8 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
   },
   "exclude": ["my-app", "node_modules", "dist"] // Exclude folders from compilation 
 }
