@@ -19,7 +19,7 @@ export const HandlewebhookEvent = async (order :any) => {
            { status: "success", 
              paymentID: order.data.object.payment_intent // this is payment intent id from stripe which we will save in our db to prevent duplicate entries in case of multiple webhook events for the same session id 
           }
-        ); // updating the order status to paid in db
+        );
       }
       else {
         console.log("Session ID already exists. This event has been processed before.");
