@@ -24,6 +24,7 @@ export const createStripesession = async (amount: number , email: any) =>{
 
 
    return {
+    currency : session.currency,
     sessionId: session.id, 
     url:session.url
   }  

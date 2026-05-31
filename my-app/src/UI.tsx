@@ -6,6 +6,7 @@ type Screen = "form" | "processor" | "processing" | "success";
 
 export default function PaymentGateway() {
   const [screen, setScreen] = useState<Screen>("form");
+  const[name , setName] = useState("Ravi Kumar");
   const [email, setEmail] = useState("ravi@example.com");
   const [phone, setPhone] = useState("+91 98765 43210");
   const [amount, setAmount] = useState("1499");
@@ -19,7 +20,7 @@ export default function PaymentGateway() {
       const res = await fetch(`${API_BASE}/api/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, phonenumber: phone, amount: Number(amount) }),
+        body: JSON.stringify({ name, email, phonenumber: phone, amount: Number(amount) }),
       });
 
       if (!res.ok) throw new Error("Failed to create order");
@@ -50,7 +51,7 @@ export default function PaymentGateway() {
         <div style={s.card}>
           <p style={s.title}>Create payment</p>
           <p style={s.sub}>Enter customer details to begin</p>
-
+          <Field label="Name" type="text" value={name} onChange={setName} placeholder="Ravi Kumar" />
           <Field label="Email" type="email" value={email} onChange={setEmail} placeholder="customer@email.com" />
           <Field label="Phone" type="tel" value={phone} onChange={setPhone} placeholder="+91 98765 43210" />
           <Field label="Amount (₹)" type="number" value={amount} onChange={setAmount} placeholder="1499" />

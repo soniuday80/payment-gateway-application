@@ -9,14 +9,16 @@ interface OrderData {
 export const createorder = async (orderdata: OrderData) => {
     try {
         // 1. call stripe first to get sessionId and url
-        const { sessionId, url } = await createStripesession(orderdata.amount, orderdata.email);
+        const { currency, sessionId, url } = await createStripesession(orderdata.amount, orderdata.email);
 
         // 2. build order data now that we have sessionId
         const result = {
             email: orderdata.email,
             phonenumber: orderdata.phonenumber,
-            status: "created",
-            sessionId: sessionId
+            status: "created", // set initial status to created, this will be updated later based on the webhook events from stripe
+            sessionId: sessionId,
+            currency: currency,
+            amount: orderdata.amount // storing the amount initialy i forgot to add this in the order data but it is important to store the amount in the order data 
         }
 
         // 3. save to DB
