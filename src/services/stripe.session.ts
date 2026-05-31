@@ -1,9 +1,13 @@
 // stripe session file and its functions that will be imported in the create order service
 import {stripe} from '../config/stripe'; 
 
-export const createStripesession = async (amount: number , email: any) =>{  
+
+
+export const createStripesession = async (amount: number, email: any) =>{  
     const session = await stripe.checkout.sessions.create({
         mode : 'payment',
+        customer_creation: 'always', // Create a new customer for each session  
+        billing_address_collection: 'required', // collect billing address and all in the checkout page
         line_items: [
         {
           price_data: {
@@ -18,7 +22,7 @@ export const createStripesession = async (amount: number , email: any) =>{
       ],
         success_url: 'http://localhost:3000/success', // redirect to this url after successful payment
         cancel_url: 'http://localhost:3000/cancel', // redirect to this url if payment is cancelled
-        customer_email: email, // set the customer's email for receipt and communication
+        customer_email: email, // Set the customer's email for the session
     })
 
 
