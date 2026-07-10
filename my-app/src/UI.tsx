@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "http://localhost:3000"; 
 
 type Screen = "form" | "processor" | "processing" | "success";
 
@@ -17,7 +17,7 @@ export default function PaymentGateway() {
   const handleProceed = async () => {
     setError("");
     try {
-      const res = await fetch(`${API_BASE}/api/create-order`, {
+      const res = await fetch(`${API_BASE}/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phonenumber: phone, amount: Number(amount) }),

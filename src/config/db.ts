@@ -1,3 +1,7 @@
+// adding dns resolver 
+import dns from 'dns';
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+
 // connection to the database 
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
