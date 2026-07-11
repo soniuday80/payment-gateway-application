@@ -20,8 +20,8 @@ export const createStripesession = async (amount: number, email: any) =>{
           quantity: 1,  
         }
       ],
-        success_url: 'http://localhost:3000/success', // redirect to this url after successful payment
-        cancel_url: 'http://localhost:3000/cancel', // redirect to this url if payment is cancelled
+        success_url: 'http://localhost:5173/?status=success', // Redirect to the frontend with a success status
+        cancel_url: 'http://localhost:5173/?status=cancel',  // Redirect to the frontend with a cancel status
         customer_email: email, // Set the customer's email for the session
     })
 
